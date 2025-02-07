@@ -16,19 +16,19 @@ export const b2cPolicies = {
     },
     authorities: {
         signUpSignIn: {
-            authority: "https://multiauth.b2clogin.com/multiauth.onmicrosoft.com/B2C_1_signupsignin1"
+            authority: import.meta.env.VITE_SIGNUP_SIGNIN_AUTHORITY
         },
         editProfile: {
-            authority: "https://multiauth.b2clogin.com/multiauth.onmicrosoft.com/B2C_1_signupsignin1"
+            authority: import.meta.env.VITE_SIGNUP_SIGNIN_AUTHORITY
         },
     },
-    authorityDomain: "multiauth.b2clogin.com"
+    authorityDomain: import.meta.env.VITE_AUTHORITY_DOMAIN
 
 }
 
 export const msalConfig : Configuration = {
     auth: {
-        clientId: "ef86e526-1e99-4e8e-996d-2a8aea66c792",
+        clientId: import.meta.env.VITE_CLIENT_ID,
         authority: b2cPolicies.authorities.signUpSignIn.authority,
         knownAuthorities: [b2cPolicies.authorityDomain],
         redirectUri: "/",
@@ -68,16 +68,12 @@ export const msalConfig : Configuration = {
 
 export const loginRequest = {
     scopes: [
-       "properties.Read",
-       "properties.Write",
-       
+       import.meta.env.VITE_SCOPES_API_READ,
+       import.meta.env.VITE_SCOPES_API_WRITE,
     ]
 }
 
 export const apiConfig = {
-    scopes: [
-        "https://multiauth.onmicrosoft.com/api/properties.read",
-        "https://multiauth.onmicrosoft.com/api/properties.write",
-    ],
-    uri: "https://multiauth.onmicrosoft.com/api"
+    apiUri: import.meta.env.VITE_API_URI,
+    graphUri: import.meta.env.VITE_GRAPH_URI,
 }

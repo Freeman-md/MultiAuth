@@ -7,16 +7,14 @@ import { msalConfig } from './authConfig.ts'
 import { BrowserRouter } from 'react-router-dom'
 
 
-const msalInstance = new PublicClientApplication(msalConfig);
+export const msalInstance = new PublicClientApplication(msalConfig);
 
 await msalInstance.initialize();
-
-console.log(await msalInstance.getAllAccounts())
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
       <App instance={msalInstance} />
     </BrowserRouter>
-  </StrictMode>,
+  </StrictMode>
 )

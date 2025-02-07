@@ -1,25 +1,27 @@
-import { PublicClientApplication } from '@azure/msal-browser'
-import './App.css'
-import { MsalProvider } from '@azure/msal-react'
-import Pages from './pages'
+import { PublicClientApplication } from "@azure/msal-browser";
+import { MsalProvider } from "@azure/msal-react";
+import { Route, Routes } from "react-router-dom";
+import Profile from "./pages/Profile";
+import Logout from "./pages/Logout";
+import Home from "./pages/Home";
+import { PageLayout } from "./layouts/default";
 
 interface AppProps {
-  instance: PublicClientApplication
+  instance: PublicClientApplication;
 }
 
-function App({
-  instance
-} : AppProps) {
-
+function App({ instance }: AppProps) {
   return (
     <MsalProvider instance={instance}>
-      <div>
-        <header>This is the header of the app</header>
-        <Pages></Pages>
-        <footer>This is the footer of the app</footer>
-      </div>
+      <Routes>
+        <Route path="/" element={<PageLayout />}>
+          <Route index element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/logout" element={<Logout />} />
+        </Route>
+      </Routes>
     </MsalProvider>
-  )
+  );
 }
 
-export default App
+export default App;
